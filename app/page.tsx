@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { ArrowRight, Wallet, Code, BarChart3, Search, Clock, Bookmark, Image } from "lucide-react";
 import { toolsRegistry } from "@/data/registry";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const resultClickRef = useRef(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("calcoder_recent_searches");
@@ -33,7 +34,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
-      <section className="relative px-4 pt-24 pb-32 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative px-4 pt-24 pb-32 sm:px-6 lg:px-8">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background"></div>
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
@@ -53,11 +54,18 @@ export default function Home() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setShowDropdown(true)}
-              onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+              onBlur={() => {
+                setTimeout(() => {
+                  if (!resultClickRef.current) {
+                    setShowDropdown(false);
+                  }
+                  resultClickRef.current = false;
+                }, 200);
+              }}
             />
 
             {showDropdown && (
-              <div className="absolute top-full mt-2 w-full bg-white border border-border rounded-xl shadow-xl z-50 max-h-96 overflow-y-auto text-left">
+              <div className="absolute top-full mt-2 w-full bg-white border border-border rounded-xl shadow-xl z-[100] max-h-96 overflow-y-auto text-left">
                 {searchQuery ? (
                   filteredTools.length > 0 ? (
                     <ul className="py-2">
@@ -66,6 +74,7 @@ export default function Home() {
                           <Link
                             href={tool.href}
                             onClick={() => saveRecentSearch(tool.id)}
+                            onPointerDown={() => { resultClickRef.current = true; }}
                             className="flex flex-col px-4 py-3 hover:bg-gray-50 transition-colors"
                           >
                             <span className="font-semibold text-primary">{tool.name}</span>
@@ -88,6 +97,7 @@ export default function Home() {
                           <li key={tool.id}>
                             <Link
                               href={tool.href}
+                              onPointerDown={() => { resultClickRef.current = true; }}
                               className="flex items-center px-4 py-3 hover:bg-gray-50 transition-colors"
                             >
                               <Search className="w-4 h-4 mr-3 text-muted-foreground" />

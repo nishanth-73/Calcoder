@@ -73,13 +73,13 @@ export function Navbar() {
         {isOpen && (
           <div className="md:hidden border-t border-border bg-white">
             <div className="px-4 py-4 space-y-3">
-              <Link href="/finance" className="block text-sm font-medium hover:text-primary transition-colors">Finance Hub</Link>
-              <Link href="/marketing" className="block text-sm font-medium hover:text-primary transition-colors">Marketing Hub</Link>
-              <Link href="/developer" className="block text-sm font-medium hover:text-primary transition-colors">Developer Hub</Link>
-              <Link href="/media" className="block text-sm font-medium hover:text-primary transition-colors">Media & File Tools</Link>
+              <Link href="/finance" onClick={() => setIsOpen(false)} className="block text-sm font-medium hover:text-primary transition-colors">Finance Hub</Link>
+              <Link href="/marketing" onClick={() => setIsOpen(false)} className="block text-sm font-medium hover:text-primary transition-colors">Marketing Hub</Link>
+              <Link href="/developer" onClick={() => setIsOpen(false)} className="block text-sm font-medium hover:text-primary transition-colors">Developer Hub</Link>
+              <Link href="/media" onClick={() => setIsOpen(false)} className="block text-sm font-medium hover:text-primary transition-colors">Media & File Tools</Link>
               <div className="border-t border-border pt-3 mt-3">
-                <Link href="/about" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</Link>
-                <Link href="/contact" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Contact</Link>
+                <Link href="/about" onClick={() => setIsOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</Link>
+                <Link href="/contact" onClick={() => setIsOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Contact</Link>
               </div>
             </div>
           </div>

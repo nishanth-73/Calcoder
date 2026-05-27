@@ -73,47 +73,40 @@ export function ToolLayout({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Main Content */}
-        <div className="lg:col-span-8 space-y-12">
-          {/* Calculator/Tool Core */}
-          <section className="glass-panel p-6 sm:p-8 rounded-2xl shadow-sm">
-            {children}
-          </section>
+        {/* Calculator/Tool Core — order-1 on mobile, order-0 on desktop (sits next to sidebar) */}
+        <section className="lg:col-span-8 glass-panel p-6 sm:p-8 rounded-2xl shadow-sm">
+          {children}
+        </section>
 
-          {/* Inline Ad */}
-          <div className="my-8 hidden sm:block">
-            <AdPlaceholder type="leaderboard" />
+        {/* Mobile only: Ad + Related Tools + Ad (renders between calculator and explanation on mobile) */}
+        <div className="space-y-8 lg:hidden">
+          <AdPlaceholder type="rectangle" />
+          <div className="glass-panel p-5 rounded-2xl">
+            <h3 className="font-semibold text-sm mb-3 flex items-center gap-2">
+              <Calculator className="w-4 h-4 text-primary" />
+              Related Tools
+            </h3>
+            <div className="space-y-0.5">
+              {relatedTools.slice(0, 6).map((tool) => (
+                <Link
+                  key={(tool as any).id || tool.href}
+                  href={tool.href}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-accent/40 transition-colors group"
+                >
+                  <Calculator className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                  <span className="text-sm font-medium group-hover:text-primary transition-colors leading-tight">
+                    {tool.name || (tool as any).title || ""}
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
-
-          {/* Explanation / Content Blocks */}
-          {explanationContent && (
-            <section className="glass-panel p-6 sm:p-8 rounded-2xl">
-              <div className="prose prose-slate max-w-none">
-                {explanationContent}
-              </div>
-            </section>
-          )}
-
-          {/* FAQ Accordion (simplified for now) */}
-          {faqContent && faqContent.length > 0 && (
-            <section className="space-y-6">
-              <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
-              <div className="space-y-3">
-                {faqContent.map((faq, index) => (
-                  <div key={index} className="glass-panel p-6 rounded-xl">
-                    <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
-                    <p className="text-muted-foreground">{faq.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+          <AdPlaceholder type="rectangle" />
         </div>
 
-        {/* Sidebar */}
-        <div className="lg:col-span-4 space-y-8">
+        {/* Sidebar (desktop only) — placed next to calculator via lg:order-1 */}
+        <aside className="lg:col-span-4 space-y-8 hidden lg:block lg:order-1">
           <div className="sticky top-24 space-y-8">
-            {/* Sidebar Ad */}
             <AdPlaceholder type="rectangle" />
 
             {/* Related Tools */}
@@ -140,6 +133,38 @@ export function ToolLayout({
             
             <AdPlaceholder type="rectangle" />
           </div>
+        </aside>
+
+        {/* Inline Ad + Explanation + FAQ — desktop row 2 (below calculator + sidebar) */}
+        <div className="lg:col-span-8 space-y-12 lg:order-2">
+          {/* Inline Ad */}
+          <div className="my-8 hidden sm:block">
+            <AdPlaceholder type="leaderboard" />
+          </div>
+
+          {/* Explanation / Content Blocks */}
+          {explanationContent && (
+            <section className="glass-panel p-6 sm:p-8 rounded-2xl">
+              <div className="prose prose-slate max-w-none">
+                {explanationContent}
+              </div>
+            </section>
+          )}
+
+          {/* FAQ Accordion */}
+          {faqContent && faqContent.length > 0 && (
+            <section className="space-y-6">
+              <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+              <div className="space-y-3">
+                {faqContent.map((faq, index) => (
+                  <div key={index} className="glass-panel p-6 rounded-xl">
+                    <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
+                    <p className="text-muted-foreground">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>
