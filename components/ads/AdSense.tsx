@@ -1,36 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 const AD_CLIENT = "ca-pub-5094484375937981";
-
-const AD_SLOTS: Record<string, string> = {
-  leaderboard: "1234567890",
-  rectangle: "1234567891",
-  "mobile-banner": "1234567892",
-  "sticky-sidebar": "1234567893",
-};
-
-const AD_DIMS: Record<string, { width: number; height: number }> = {
-  leaderboard: { width: 728, height: 90 },
-  rectangle: { width: 300, height: 250 },
-  "mobile-banner": { width: 320, height: 50 },
-  "sticky-sidebar": { width: 300, height: 600 },
-};
-
-const AD_FORMATS: Record<string, string> = {
-  leaderboard: "horizontal",
-  rectangle: "rectangle",
-  "mobile-banner": "horizontal",
-  "sticky-sidebar": "vertical",
-};
-
-const AD_MIN_DIMS: Record<string, { minWidth: string; minHeight: string }> = {
-  leaderboard: { minWidth: "300px", minHeight: "90px" },
-  rectangle: { minWidth: "300px", minHeight: "250px" },
-  "mobile-banner": { minWidth: "300px", minHeight: "50px" },
-  "sticky-sidebar": { minWidth: "300px", minHeight: "600px" },
-};
 
 interface AdSenseProps {
   slot?: string;
@@ -38,51 +10,43 @@ interface AdSenseProps {
   className?: string;
 }
 
-export function AdSense({ slot, format = "rectangle", className = "" }: AdSenseProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const initialized = useRef(false);
-  const adSlot = slot || AD_SLOTS[format];
-  const dims = AD_DIMS[format];
-  const adFormat = AD_FORMATS[format];
-  const minDims = AD_MIN_DIMS[format];
+const DIMS: Record<string, { w: number; h: number }> = {
+  leaderboard: { w: 728, h: 90 },
+  rectangle: { w: 300, h: 250 },
+  "mobile-banner": { w: 320, h: 50 },
+  "sticky-sidebar": { w: 300, h: 600 },
+};
+
+const FORMAT_NAMES: Record<string, string> = {
+  leaderboard: "Leaderboard Ad",
+  rectangle: "Rectangle Ad",
+  "mobile-banner": "Mobile Banner Ad",
+  "sticky-sidebar": "Skyscraper Ad",
+};
+
+export function AdSense({ format = "rectangle", className = "" }: AdSenseProps) {
+  const [mounted, setMounted] = useState(false);
+  const dims = DIMS[format];
 
   useEffect(() => {
-    if (initialized.current) return;
-    initialized.current = true;
-
-    let attempts = 0;
-    const maxAttempts = 30;
-
-    function tryPush() {
-      if (containerRef.current && containerRef.current.offsetWidth > 0) {
-        if (window.location.protocol === 'chrome-error:' || window.location.protocol === 'about:' || window.location.protocol === 'data:') return;
-        try {
-          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-        } catch {
-          // Silently ignore — ad won't render but app stays stable
-        }
-      } else if (attempts < maxAttempts) {
-        attempts++;
-        setTimeout(tryPush, 100);
-      }
-    }
-
-    tryPush();
+    setMounted(true);
   }, []);
 
   return (
     <div
-      ref={containerRef}
-      className={`ad-container mx-auto ${className}`}
-      style={{ width: "100%", minWidth: minDims.minWidth, minHeight: minDims.minHeight }}
+      className={`mx-auto flex items-center justify-center rounded-lg border-2 border-dashed border-border bg-muted/30 ${className}`}
+      style={{
+        width: "100%",
+        minWidth: "300px",
+        minHeight: `${dims.h}px`,
+        maxWidth: dims.w === 728 ? "728px" : "100%",
+      }}
     >
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", width: dims.width, height: dims.height }}
-        data-ad-client={AD_CLIENT}
-        data-ad-slot={adSlot}
-        data-ad-format={adFormat}
-      />
+      {mounted && (
+        <p className="text-xs text-muted-foreground text-center px-4">
+          {FORMAT_NAMES[format]}
+        </p>
+      )}
     </div>
   );
 }

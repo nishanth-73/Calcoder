@@ -34,10 +34,10 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
-      <section className="relative isolate px-4 pt-24 pb-32 sm:px-6 lg:px-8">
+      <section className="relative isolate px-4 pt-24 pb-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background"></div>
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8">
             The Ultimate Hub for <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">Calculators & Tools</span>
           </h1>
@@ -116,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* Category Hubs */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white border-t border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Explore Our Hubs</h2>
 
@@ -181,7 +181,7 @@ export default function Home() {
       </section>
 
       {/* Popular Tools */}
-      <section className="py-20">
+      <section className="py-20 border-t border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
