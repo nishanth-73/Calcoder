@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.re_9RAkxdF9_DcNEdxQR3KvS4Tj5kJWx5CV7);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface ContactBody {
   name: string;
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const toEmail = process.env.TO_EMAIL || "medurinishanth@gmail.com";
+    const toEmail = process.env.TO_EMAIL;
     const fromEmail = process.env.FROM_EMAIL || "onboarding@resend.dev";
 
     if (!toEmail) {
