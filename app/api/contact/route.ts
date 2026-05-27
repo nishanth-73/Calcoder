@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface ContactBody {
   name: string;
   email: string;
   subject: string;
   message: string;
+}
+
+function getResend(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
+  return new Resend(apiKey);
 }
 
 export async function POST(request: NextRequest) {
@@ -55,6 +59,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Destination email not configured." },
         { status: 500 }
+      );
+    }
+
+    const resend = getResend();
+    if (!resend) {
+      return NextResponse.json(
+        { success: false, error: "Email service unavailable" },
+        { status: 503 }
       );
     }
 
