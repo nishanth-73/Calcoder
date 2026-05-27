@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Calcoder - Scalable Micro-Tools & Calculators",
   description: "A comprehensive suite of scalable micro-tools and calculators for finance, marketing, and developers.",
+  verification: {
+    google: "c-ExQOZ8CesTXRGsw1wo1dzRPy7AcpV_zdIZPAzNmVQ",
+  },
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.svg",
