@@ -498,7 +498,7 @@ export default function InflationCalculator() {
             {valueLost > 0 && (
               <div className="bg-white border border-border rounded-xl p-6">
                 <div className="flex items-center justify-center h-36">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                     <PieChart>
                       <Pie data={pieData} cx="50%" cy="50%" innerRadius={38} outerRadius={62}
                         dataKey="value" animationBegin={100} animationDuration={800}>
@@ -548,7 +548,7 @@ export default function InflationCalculator() {
               </h3>
             </div>
             <div className="h-72 sm:h-80">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="ppGrad" x1="0" y1="0" x2="0" y2="1">

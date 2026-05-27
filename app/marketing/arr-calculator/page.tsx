@@ -389,7 +389,7 @@ export default function ArrCalculator() {
             </p>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-32 h-32 flex-shrink-0 mx-auto">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                   <PieChart>
                     <Pie data={chartData} cx="50%" cy="50%" innerRadius={38} outerRadius={62} dataKey="value" strokeWidth={0}>
                       {chartData.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}

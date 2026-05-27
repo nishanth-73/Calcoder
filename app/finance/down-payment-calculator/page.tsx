@@ -534,7 +534,7 @@ export default function DownPaymentCalculator() {
               <div className="bg-white border border-border rounded-xl p-4">
                 <p className="text-xs text-muted-foreground mb-2 text-center">Price Composition</p>
                 <div className="h-24">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                     <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" opacity={0.1} horizontal={false} />
                       <XAxis type="number" tickFormatter={(v: number) => formatCompact(v, currency)} fontSize={10} />
@@ -559,7 +559,7 @@ export default function DownPaymentCalculator() {
                   Savings Timeline
                 </p>
                 <div className="h-32">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                     <AreaChart data={timelineData} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
                       <defs>
                         <linearGradient id="savingsGrad" x1="0" y1="0" x2="0" y2="1">

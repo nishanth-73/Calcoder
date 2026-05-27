@@ -613,7 +613,7 @@ export default function NetWorthCalculator() {
               <div className="bg-white border border-border rounded-xl p-4">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Assets vs Liabilities</p>
                 <div className="h-40">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                     <BarChart data={comparisonData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
                       <XAxis dataKey="name" fontSize={11} tickMargin={6} />
@@ -631,7 +631,7 @@ export default function NetWorthCalculator() {
               <div className="bg-white border border-border rounded-xl p-6">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Asset Allocation</p>
                 <div className="flex items-center justify-center h-36">
-                  <ResponsiveContainer width="60%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="60%" height="100%">
                     <PieChart>
                       <Pie data={assetData} cx="50%" cy="50%" innerRadius={38} outerRadius={62}
                         dataKey="value" animationBegin={100} animationDuration={800}>
@@ -673,7 +673,7 @@ export default function NetWorthCalculator() {
               <div className="bg-white border border-border rounded-xl p-6">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Liability Breakdown</p>
                 <div className="flex items-center justify-center h-36">
-                  <ResponsiveContainer width="60%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="60%" height="100%">
                     <PieChart>
                       <Pie data={liabData} cx="50%" cy="50%" innerRadius={38} outerRadius={62}
                         dataKey="value" animationBegin={200} animationDuration={800}>

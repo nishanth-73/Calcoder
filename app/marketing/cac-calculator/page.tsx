@@ -627,7 +627,7 @@ export default function CacCalculator() {
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
               <div className="w-32 h-32 flex-shrink-0 mx-auto sm:mx-0">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={chartData}

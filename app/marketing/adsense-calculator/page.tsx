@@ -441,7 +441,7 @@ export default function AdSenseCalculator() {
             </p>
             <div className="flex items-start gap-6 mb-4">
               <div className="w-32 h-32 flex-shrink-0">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                   <PieChart>
                     <Pie data={chartData} cx="50%" cy="50%" innerRadius={38} outerRadius={62} dataKey="value" strokeWidth={0}>
                       {chartData.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}

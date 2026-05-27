@@ -714,7 +714,7 @@ export default function LoanRepaymentCalculator() {
               <div className="flex items-center gap-4 justify-center h-52">
                 <div className="flex-1">
                   <p className="text-xs text-center text-muted-foreground mb-1">Standard</p>
-                  <ResponsiveContainer width="100%" height={140}>
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height={140}>
                     <PieChart>
                       <Pie
                         data={standardPieData}
@@ -735,7 +735,7 @@ export default function LoanRepaymentCalculator() {
                 {hasExtra && (
                   <div className="flex-1">
                     <p className="text-xs text-center text-emerald-600 font-medium mb-1">With Extra</p>
-                    <ResponsiveContainer width="100%" height={140}>
+                    <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height={140}>
                       <PieChart>
                         <Pie
                           data={extraPieData}
@@ -793,7 +793,7 @@ export default function LoanRepaymentCalculator() {
               </h3>
             </div>
             <div className="h-72 sm:h-80">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                 <AreaChart data={mergedChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="stdGrad" x1="0" y1="0" x2="0" y2="1">

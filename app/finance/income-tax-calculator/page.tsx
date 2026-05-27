@@ -816,7 +816,7 @@ export default function IncomeTaxCalculator() {
             <div className="bg-white border border-border rounded-xl p-6">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Tax vs Take-Home</p>
               <div className="flex items-center justify-center h-36">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={pieData}
@@ -988,7 +988,7 @@ export default function IncomeTaxCalculator() {
       {results.slabData.some((s) => s.value > 0) && (
         <div className="bg-white border border-border rounded-xl p-4 sm:p-5">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Tax by Slab</p>
-          <ResponsiveContainer width="100%" height={240}>
+          <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height={240}>
             <BarChart data={results.slabData.filter((s) => s.value > 0)} margin={{ top: 16, right: 16, left: 8, bottom: 8 }} barCategoryGap="25%" barGap={4}>
               <CartesianGrid strokeDasharray="3 3" opacity={0.12} vertical={false} />
               <XAxis type="category" dataKey="name" tickFormatter={(v: string) => v.split(" (")[0]} tick={{ fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#e5e7eb', strokeWidth: 1 }} tickMargin={6} />

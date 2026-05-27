@@ -542,7 +542,7 @@ export default function BreakEvenCalculator() {
                 Cost Structure at Break-Even
               </p>
               <div className="flex items-center justify-center h-36">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={pieData}

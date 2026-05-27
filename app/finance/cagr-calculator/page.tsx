@@ -502,7 +502,7 @@ export default function CAGRCalculator() {
             {positiveReturn && (
               <div className="bg-white border border-border rounded-xl p-6">
                 <div className="flex items-center justify-center h-36">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                     <PieChart>
                       <Pie
                         data={pieData}
@@ -558,7 +558,7 @@ export default function CAGRCalculator() {
               </h3>
             </div>
             <div className="h-72 sm:h-80">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer initialDimension={{width:100,height:100}} width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="cagrGrad" x1="0" y1="0" x2="0" y2="1">
