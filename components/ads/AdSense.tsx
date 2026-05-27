@@ -11,11 +11,11 @@ const AD_SLOTS: Record<string, string> = {
   "sticky-sidebar": "1234567893",
 };
 
-const AD_DIMS: Record<string, { width: string; height: string }> = {
-  leaderboard: { width: "728", height: "90" },
-  rectangle: { width: "300", height: "250" },
-  "mobile-banner": { width: "320", height: "50" },
-  "sticky-sidebar": { width: "300", height: "600" },
+const AD_DIMS: Record<string, { width: number; height: number }> = {
+  leaderboard: { width: 728, height: 90 },
+  rectangle: { width: 300, height: 250 },
+  "mobile-banner": { width: 320, height: 50 },
+  "sticky-sidebar": { width: 300, height: 600 },
 };
 
 const AD_FORMATS: Record<string, string> = {
@@ -55,6 +55,7 @@ export function AdSense({ slot, format = "rectangle", className = "" }: AdSenseP
 
     function tryPush() {
       if (containerRef.current && containerRef.current.offsetWidth > 0) {
+        if (window.location.protocol === 'chrome-error:' || window.location.protocol === 'about:' || window.location.protocol === 'data:') return;
         try {
           ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
         } catch {
@@ -77,7 +78,7 @@ export function AdSense({ slot, format = "rectangle", className = "" }: AdSenseP
     >
       <ins
         className="adsbygoogle"
-        style={{ display: "inline-block", width: dims.width, height: dims.height }}
+        style={{ display: "block", width: dims.width, height: dims.height }}
         data-ad-client={AD_CLIENT}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
