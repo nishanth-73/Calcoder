@@ -1,13 +1,23 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BookmarkProvider } from "@/lib/useBookmarks";
+import PwaInstallPrompt from "@/components/PwaInstallPrompt";
+import PwaScript from "@/components/PwaScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const AD_CLIENT = "ca-pub-5094484375937981";
+
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Calcoder - Scalable Micro-Tools & Calculators",
@@ -19,15 +29,22 @@ export const metadata: Metadata = {
     "google-adsense-account": AD_CLIENT,
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.svg",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.svg", type: "image/svg+xml" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+    ],
     shortcut: "/icon.svg",
   },
-  manifest: "/site.webmanifest",
   appleWebApp: {
     title: "Calcoder",
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     capable: true,
+    startupImage: "/icon-512x512.png",
   },
 };
 
@@ -46,6 +63,8 @@ export default function RootLayout({
           </main>
           <Footer />
         </BookmarkProvider>
+        <PwaInstallPrompt />
+        <PwaScript />
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AD_CLIENT}`}
